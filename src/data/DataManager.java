@@ -4,7 +4,15 @@ import java.util.ArrayList;
 
 public class DataManager {
 	
-
+	public String saveThema(ThemaObject thema) {
+		// Hier könnte Code zum Speichern des Themas in einer Datenbank oder Datei
+		// stehen
+		// Aktuell wird nur eine Bestätigung zurückgegeben
+		return "Das Thema '" + thema.getTitel() + "' wurde erfolgreich gespeichert.";
+	}
+	
+	
+	
 	public ArrayList<ThemaObject> ladeAlleThemen() {
         ArrayList<ThemaObject> liste = new ArrayList<>();
         
@@ -20,4 +28,5 @@ public class DataManager {
         }
         return liste;
         }
+
 }

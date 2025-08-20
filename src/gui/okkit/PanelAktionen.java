@@ -37,7 +37,6 @@ public class PanelAktionen extends JPanel {
 	JButton btnLoeschen;
 	JButton btnSpeichern;
 	JButton btnNeuesThema;
-
 	JTextField messageArea;
 
 
@@ -57,6 +56,10 @@ public class PanelAktionen extends JPanel {
 		initComponents();
 		addComponents();
        }
+
+    public void setMessage(String msg) {
+	        messageArea.setText(msg);   // χρησιμοποιεί το ήδη υπάρχον JTextField σου
+	    }
 
 	/**
 	 * Initialisiert die UI-Komponenten dieses Panels.
