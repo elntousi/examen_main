@@ -40,14 +40,10 @@ public class PanelAktionen extends JPanel {
 
 	JTextField messageArea;
 
-	public interface Delegate {
-	    void saveTheme();
-	    void deleteTheme();
-	    void newTheme();
-	}
+
 	
-	private Delegate delegate;
-	public void setDelegate(Delegate delegate) { this.delegate = delegate; }
+	private AktionPanelDelegate delegate;
+	public void setDelegate(AktionPanelDelegate delegate) { this.delegate = delegate; }
 
 	/**
 	 * Erstellt das Aktionen-Panel, initialisiert alle UI-Komponenten und

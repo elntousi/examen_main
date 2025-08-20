@@ -26,8 +26,8 @@ import gui.okkit.PanelThemenListe.ListSelectionDelegate;
  * @version 1.0
  * @since 12 Aug 2025
  */
-public class HauptPanel extends JPanel implements PanelThemenListe.ListSelectionDelegate, PanelAktionen.Delegate {
-
+public class HauptPanel extends JPanel implements PanelThemenListe.ListSelectionDelegate, AktionPanelDelegate {
+    
     // Unter-Panels, die im Layout verwendet werden
     PanelThemenListe panelThemenListe;
     PanelNeuesThema panelNeuesThema;
@@ -52,17 +52,6 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
         addPanels();
     }
     
-	public interface PanelAktionenDelegate {
-		/**
-		 * Methoden, die von {@link HauptPanel} aufgerufen werden, wenn die
-		 * entsprechenden Aktionen ausgelöst werden.
-		 */
-		public void saveTheme();
-
-		public void deleteTheme();
-
-		public void newTheme();
-	}
 
 	/**
 	 * Implementiert die Methoden des {@link PanelAktionenDelegate} Interfaces, um
@@ -71,16 +60,17 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
 	 * erweitert werden, um tatsächliche Logik zu implementieren.
 	 */
 	
-	
+    @Override
 	public void saveTheme()   {
 		System.out.println("saveTheme() wurde aufgerufen");
 		}
 	
-	
+    @Override
     public void deleteTheme() {
     	System.out.println("deleteTheme() wurde aufgerufen"); 
     	}
-	
+    
+    @Override
     public void newTheme()    {
     	System.out.println("newTheme() wurde aufgerufen"); 
     	}
@@ -97,7 +87,7 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
         panelThemenListe.delegate = this;
         panelNeuesThema = new PanelNeuesThema();
         panelAktionen = new PanelAktionen();
-        panelAktionen.setDelegate(this); // <-- ΣΗΜΑΝΤΙΚΟ
+        panelAktionen.setDelegate(this); // <-- ΣΗΜΑΝΤΙΚΟ  σημαντικό
 
     }
 
@@ -137,6 +127,7 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(panelAktionen, gbc);
     }
+    
 
 }
 
