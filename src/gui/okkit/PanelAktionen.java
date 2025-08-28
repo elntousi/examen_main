@@ -40,7 +40,6 @@ public class PanelAktionen extends JPanel {
 	JTextField messageArea;
 
 
-	
 	private AktionPanelDelegate delegate;
 	public void setDelegate(AktionPanelDelegate delegate) { this.delegate = delegate; }
 

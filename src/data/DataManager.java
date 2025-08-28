@@ -41,6 +41,29 @@ public class DataManager {
 		return "Das Thema '" + thema.getTitel() + "' wurde erfolgreich gespeichert.";
 	}
 	
+	// DataManager.java  (package data)
+
+	public boolean deleteThema(ThemaObject thema) {
+	    if (thema == null) return false;
+
+	    // 1) Προσπάθεια διαγραφής SQL
+	    final String sql = "DELETE FROM themen WHERE id = ?";
+
+	    try (Connection con = DriverManager.getConnection(URL, USER, PASSWORD);
+	         PreparedStatement ps = con.prepareStatement(sql)) {
+
+	        ps.setInt(1, thema.getId());
+	        int rows = ps.executeUpdate();
+	        if (rows > 0) {
+	            return true; // OK, διαγράφηκε από τη ΒΔ
+	        }
+	    } catch (SQLException e) {
+	        // Δεν ρίχνουμε τη διεργασία — κάνουμε fallback
+	        System.err.println("DB delete failed, fallback to in-memory: " + e.getMessage());
+	    }
+		return false;
+
+	}
 
 	
 	public ArrayList<ThemaObject> ladeAlleThemen() {

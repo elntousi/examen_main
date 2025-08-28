@@ -110,23 +110,43 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
     public void deleteTheme() {
         System.out.println("deleteTheme() wurde aufgerufen");
 
-        // 1) Ausgewähltes Thema holen
+        // 1) Πάρε το επιλεγμένο θέμα
         ThemaObject selected = panelThemenListe.getSelected();
         if (selected == null) {
             panelAktionen.setMessage("Kein Thema ausgewählt.");
             return;
         }
 
-        // 2) Thema aus der Liste entfernen
-        panelThemenListe.removeSelected();
+        // 2) Επιβεβαίωση από τον χρήστη
+        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                this,
+                "Möchten Sie das ausgewählte Thema wirklich löschen?",
+                "Löschen bestätigen",
+                javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+            return; // Ο χρήστης ακύρωσε
+        }
 
-        // 3) Formular zurücksetzen
-        panelNeuesThema.titelFeld.setText("");
-        panelNeuesThema.infoArea.setText("");
+        // 3) Διαγραφή από τη βάση μέσω DataManager
+        boolean ok = manager.deleteThema(selected);
 
-        // 4) Statusmeldung anzeigen
-        panelAktionen.setMessage("Thema gelöscht: " + selected.getTitel());
+        if (ok) {
+            // 4) Αφαίρεση από τη λίστα GUI
+            panelThemenListe.removeSelected();
+
+            // 5) Καθάρισε τα πεδία εισαγωγής
+            panelNeuesThema.titelFeld.setText("");
+            panelNeuesThema.infoArea.setText("");
+
+            // 6) Ενημέρωσε τον χρήστη
+            panelAktionen.setMessage("Thema gelöscht: " + selected.getTitel());
+        } else {
+            // Αν αποτύχει η διαγραφή
+            panelAktionen.setMessage("Fehler: Thema konnte nicht gelöscht werden.");
+        }
     }
+
 
     /**
      * Erstellt ein leeres Formular für ein neues Thema.
