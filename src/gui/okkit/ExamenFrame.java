@@ -17,30 +17,30 @@ import javax.swing.SwingUtilities;
  */
 public class ExamenFrame extends JFrame {
 
-    /**
-     * Erzeugt ein neues Hauptfenster und initialisiert die grundlegenden
-     * Eigenschaften (Titel, Close-Operation, Größe, Position) sowie das
-     * {@link HauptPanel} als Content Pane.
-     */
-    public ExamenFrame() {
-        setTitle("Examen");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 480);
-        setLocationRelativeTo(null);
-        setContentPane(new HauptPanel());
-    }
+	/**
+	 * Erzeugt ein neues Hauptfenster und initialisiert die grundlegenden
+	 * Eigenschaften (Titel, Close-Operation, Größe, Position) sowie das
+	 * {@link HauptPanel} als Content Pane.
+	 */
+	public ExamenFrame() {
+		setTitle("Examen");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(800, 480);
+		setLocationRelativeTo(null);
+		setContentPane(new HauptPanel());
+	}
 
-    /**
-     * Einstiegspunkt der Anwendung.
-     * <p>
-     * Startet das GUI im Event Dispatch Thread (EDT), sodass alle Swing-
-     * Operationen thread-sicher ausgeführt werden. Öffnet anschließend das
-     * {@link ExamenFrame}.
-     * </p>
-     *
-     * @param args Kommandozeilenparameter (werden nicht verwendet)
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new ExamenFrame().setVisible(true));
-    }
+	/**
+	 * Einstiegspunkt der Anwendung.
+	 * <p>
+	 * Startet das GUI im Event Dispatch Thread (EDT), sodass alle Swing-
+	 * Operationen thread-sicher ausgeführt werden. Öffnet anschließend das
+	 * {@link ExamenFrame}.
+	 * </p>
+	 *
+	 * @param args Kommandozeilenparameter (werden nicht verwendet)
+	 */
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> new ExamenFrame().setVisible(true));
+	}
 }

@@ -116,11 +116,12 @@ public class PanelThemenListe extends JPanel implements ListSelectionListener {
 	}
 
 	// --- Public API für HauptPanel ---
-	public void setListData(ArrayList<ThemaObject> listData) {
-		model.clear();
-		for (ThemaObject th : listData) {
-			model.addElement(th);
+	public void setListData(java.util.List<ThemaObject> themen) {
+		DefaultListModel<ThemaObject> model = new DefaultListModel<>();
+		for (ThemaObject t : themen) {
+			model.addElement(t);
 		}
+		themenListe.setModel(model);
 	}
 
 	/** Liefert das aktuell ausgewählte Thema (oder null). */
