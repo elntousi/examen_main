@@ -66,6 +66,7 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
 	 * Speichert ein neues oder bearbeitetes Thema. Wird vom "Speichern"-Button in
 	 * PanelAktionen aufgerufen.
 	 */
+
 	@Override
 	public void saveTheme() {
 		System.out.println("saveTheme() wurde aufgerufen");
@@ -81,19 +82,33 @@ public class HauptPanel extends JPanel implements PanelThemenListe.ListSelection
 			return;
 		}
 
-		// 3) Ausgewähltes Thema holen oder neues Thema erstellen
+		// 3) Wenn nur der Titel eingegeben wurde, um Bestätigung bitten
+		if (info == null || info.isBlank()) {
+			int opt = javax.swing.JOptionPane.showOptionDialog(this,
+					"Es wurde nur der Titel eingegeben.\nMöchten Sie trotzdem speichern?", "Nur Titel speichern?",
+					javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.QUESTION_MESSAGE, null,
+					new Object[] { "OK", "Abbrechen" }, // benannte Buttons
+					"OK");
+			if (opt != javax.swing.JOptionPane.OK_OPTION) {
+				// Abgebrochen → zurück ins Formular
+				panelNeuesThema.infoArea.requestFocusInWindow();
+				return;
+			}
+		}
+
+		// 4) Ausgewähltes Thema holen oder neues Thema erstellen
 		ThemaObject selected = panelThemenListe.getSelected();
 		ThemaObject thema = (selected != null) ? selected : new ThemaObject();
 		thema.setTitel(titel);
 		thema.setInfo(info);
 
-		// 4) Speichern des Themas über DataManager
+		// 5) Speichern des Themas über DataManager
 		String msg = manager.saveThema(thema);
 
-		// 5) Liste mit aktuellen Daten aus der DB neu laden
+		// 6) Liste mit aktuellen Daten aus der DB neu laden
 		panelThemenListe.setListData(manager.ladeAlleThemen());
 
-		// 6) Auswahl zurücksetzen und Statusmeldung anzeigen
+		// 7) Auswahl zurücksetzen und Statusmeldung anzeigen
 		panelThemenListe.clearSelection();
 		panelAktionen.setMessage(msg);
 	}

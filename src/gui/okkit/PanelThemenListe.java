@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -13,6 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import java.text.Collator;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Locale;
 
 import data.ThemaObject;
 
@@ -68,6 +71,13 @@ public class PanelThemenListe extends JPanel implements ListSelectionListener {
 	private DefaultListModel<ThemaObject> model = new DefaultListModel<ThemaObject>();
 	ListSelectionDelegate delegate;
 
+	// Hilfsfunktionen für Sortierung
+	private static boolean isBlank(String s) {
+		return s == null || s.trim().isEmpty();
+	}
+
+	private static final Collator DE_COLLATOR = Collator.getInstance(Locale.GERMAN);
+
 	public PanelThemenListe() {
 		super();
 		initList();
@@ -115,13 +125,30 @@ public class PanelThemenListe extends JPanel implements ListSelectionListener {
 		}
 	}
 
-	// --- Public API für HauptPanel ---
-	public void setListData(java.util.List<ThemaObject> themen) {
-		DefaultListModel<ThemaObject> model = new DefaultListModel<>();
+	/**
+	 * Setzt die Listendaten neu und sortiert: zuerst Themen ohne Info
+	 * (Sternchen-Gruppe), dann mit Info; innerhalb jeder Gruppe alphabetisch
+	 * (deutsche Sortierung).
+	 */
+	public void setListData(List<ThemaObject> themen) {
+		// Sortierung: ohne Info zuerst (zeigt sich als "* Titel"), dann mit Info;
+		// innerhalb jeder Gruppe nach Titel (deutscher Collator)
+		themen.sort(Comparator.comparing((ThemaObject t) -> isBlank(t.getInfo()) ? 0 : 1).thenComparing(t -> {
+			String tt = (t.getTitel() == null) ? "" : t.getTitel().trim();
+			return tt;
+		}, DE_COLLATOR));
+
+		// Model neu aufbauen
+		DefaultListModel<ThemaObject> neuesModel = new DefaultListModel<>();
 		for (ThemaObject t : themen) {
-			model.addElement(t);
+			neuesModel.addElement(t);
 		}
-		themenListe.setModel(model);
+
+		// Model in der JList setzen und Referenz aktualisieren,
+		// damit addThema()/removeSelected()/refreshSelected() weiter mit dem selben
+		// Model arbeiten
+		this.themenListe.setModel(neuesModel);
+		this.model = neuesModel;
 	}
 
 	/** Liefert das aktuell ausgewählte Thema (oder null). */

@@ -48,6 +48,9 @@ public class ThemaObject {
 
 	@Override
 	public String toString() {
-		return titel;
+		// Anforderung 2: Markiere Themen ohne Info mit "* "
+		String t = (titel == null) ? "" : titel.trim();
+		boolean ohneInfo = (info == null) || info.trim().isEmpty();
+		return ohneInfo ? "* " + t : t;
 	}
 }
