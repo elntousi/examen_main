@@ -1,4 +1,4 @@
-package gui.okkit;
+package io.github.elntousi.examen.ui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,8 +9,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import data.ThemaObject;
-import gui.okkit.PanelThemenListe.ListSelectionDelegate;
+import io.github.elntousi.examen.data.ThemaObject;
+import io.github.elntousi.examen.ui.PanelThemenListe.ListSelectionDelegate;
 
 /**
  * Panel mit den Hauptaktionen der Anwendung und einer Meldungszeile.

@@ -1,4 +1,4 @@
-package gui.okkit;
+package io.github.elntousi.examen.ui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

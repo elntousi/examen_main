@@ -1,4 +1,4 @@
-package data;
+package io.github.elntousi.examen.data;
 
 public class ThemaObject {
 

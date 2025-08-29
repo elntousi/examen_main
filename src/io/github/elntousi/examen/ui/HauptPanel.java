@@ -1,12 +1,12 @@
-package gui.okkit;
+package io.github.elntousi.examen.ui;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import javax.swing.JPanel;
 
-import data.DataManager;
-import data.ThemaObject;
+import io.github.elntousi.examen.data.DataManager;
+import io.github.elntousi.examen.data.ThemaObject;
 
 /**
  * Zentrales Panel der Anwendung, das im {@link ExamenFrame} eingebettet wird.

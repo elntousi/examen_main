@@ -1,4 +1,4 @@
-package gui.okkit;
+package io.github.elntousi.examen.ui;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -12,12 +12,12 @@ import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import io.github.elntousi.examen.data.ThemaObject;
+
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
-import data.ThemaObject;
 
 /**
  * Panel zur Anzeige einer scrollbaren Themenliste.

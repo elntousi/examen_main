@@ -1,4 +1,4 @@
-package gui.okkit;
+package io.github.elntousi.examen.ui;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
