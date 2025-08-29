@@ -16,7 +16,7 @@ Fokus: klare GUI, saubere DB-Anbindung, und ein paar hilfreiche UX-Details.
 ## 📸 Finales UI
 Vorschau nach allen Anpassungen (Sortierung, Sternchen, Dialog):
 
-![Themenliste – sortiert und markiert](./assets/final-ui.png)
+![Themenliste – sortiert und markiert]([assets/final-ui.png](https://github.com/elntousi/examen_main/blob/main/assets/final-ui.PNG))
 
 > Falls die Grafik nicht angezeigt wird: Screenshot als `assets/final-ui.png` ins Repo legen.
 
